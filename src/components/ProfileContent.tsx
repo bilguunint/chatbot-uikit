@@ -12,7 +12,6 @@ import {
   LogOut,
   Camera,
   ChevronRight,
-  Toggle,
 } from "lucide-react";
 
 const settingsSections = [
