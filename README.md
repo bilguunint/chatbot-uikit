@@ -1,36 +1,118 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sondor AI — Chat UI Kit
+
+A modern, fully responsive AI chatbot interface built with **Next.js 16**, **Tailwind CSS v4**, **TypeScript**, and **Lucide React** icons. Designed as a production-ready UI kit for AI-powered chat applications.
+
+## Features
+
+- **Multi-page layout** — Home, Explore, Library, Files, History, Widgets, Theme, Profile
+- **AI model selector** — Switch between 6 AI models (Sondor 4o, Ultra, Vision, Code, Mini, Reason)
+- **Theme system** — Light / Dark / System mode with 6 accent colors (Purple, Blue, Emerald, Rose, Amber, Cyan)
+- **Collapsible sidebar** — Full navigation with expand/collapse support
+- **32+ widget components** — Pre-built UI widgets for dashboards
+- **Profile page** — User profile, usage stats, and settings
+- **Chat history** — Organized by Today, Yesterday, and 7 days
+- **Dark mode** — Fully supported across all pages and components
+
+## Tech Stack
+
+| Technology | Version | Purpose |
+|---|---|---|
+| [Next.js](https://nextjs.org) | 16.2.4 | React framework (App Router) |
+| [React](https://react.dev) | 19.2.4 | UI library |
+| [Tailwind CSS](https://tailwindcss.com) | 4.x | Utility-first CSS |
+| [TypeScript](https://typescriptlang.org) | 5.x | Type safety |
+| [Lucide React](https://lucide.dev) | 1.8.0 | Icon library |
+
+## Prerequisites
+
+- **Node.js** 18.x or later
+- **npm** 9.x or later
 
 ## Getting Started
 
-First, run the development server:
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/your-username/ai-chat-ui.git
+cd ai-chat-ui
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Available Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command | Description |
+|---|---|
+| `npm run dev` | Start development server with hot reload |
+| `npm run build` | Create optimized production build |
+| `npm run start` | Start production server |
+| `npm run lint` | Run ESLint for code quality checks |
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+├── app/
+│   ├── globals.css          # Theme variables & Tailwind config
+│   ├── layout.tsx           # Root layout with ThemeProvider
+│   └── page.tsx             # Main page with view routing
+├── components/
+│   ├── ThemeProvider.tsx     # Theme context (mode, accent color)
+│   ├── Sidebar.tsx          # Collapsible navigation sidebar
+│   ├── MainContent.tsx      # Chat interface with model selector
+│   ├── ExploreContent.tsx   # Explore page
+│   ├── LibraryContent.tsx   # Library page
+│   ├── FilesContent.tsx     # Files page
+│   ├── HistoryContent.tsx   # Chat history page
+│   ├── WidgetsContent.tsx   # Widget components showcase
+│   ├── ThemeContent.tsx     # Theme settings page
+│   └── ProfileContent.tsx   # User profile & settings
+public/
+└── assets/
+    └── logo-{color}.png     # Per-theme logo variants
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Customization
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Accent Colors
 
-## Deploy on Vercel
+Edit `src/components/ThemeProvider.tsx` to add or modify accent colors. Each color requires a full shade palette (50–900).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Theme Variables
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+All CSS variables are defined in `src/app/globals.css` using Tailwind CSS v4's `@theme` directive with dark mode overrides.
+
+## Deploy
+
+### Vercel (Recommended)
+
+```bash
+npm run build
+```
+
+Deploy to [Vercel](https://vercel.com) with zero configuration — it auto-detects Next.js.
+
+### Docker / Self-hosted
+
+```bash
+npm run build
+npm run start
+```
+
+The production server runs on port 3000 by default.
+
+## License
+
+MIT
