@@ -12,9 +12,6 @@ export default defineConfig({
   treeshake: true,
   splitting: false,
   external: ["react", "react-dom", "react/jsx-runtime"],
-  banner: {
-    js: '"use client";',
-  },
   outExtension({ format }) {
     return { js: format === "cjs" ? ".cjs" : ".js" };
   },

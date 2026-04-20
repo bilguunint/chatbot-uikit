@@ -14,7 +14,15 @@
 
   <br><br>
 
-  <a href="https://chatbot-uikit.vercel.app/">Live Demo</a>
+  <p>
+    <a href="https://chatbot-uikit.vercel.app/"><strong>🔴 Live Demo</strong></a>
+    &nbsp;·&nbsp;
+    <a href="#-quick-start-library">Quick Start</a>
+    &nbsp;·&nbsp;
+    <a href="packages/ui/README.md">Library Docs</a>
+    &nbsp;·&nbsp;
+    <a href="CONTRIBUTING.md">Contributing</a>
+  </p>
 </div>
 
 <br>
@@ -66,35 +74,85 @@ A modern, fully responsive AI chatbot interface built with **Next.js 16**, **Tai
 | [TypeScript](https://typescriptlang.org) | 5.x | Type safety |
 | [Lucide React](https://lucide.dev) | 1.8.0 | Icon library |
 
-## Prerequisites
+## 🚀 Quick Start (Library)
 
-- **Node.js** 18.x or later
-- **npm** 9.x or later
+Use `@sondor/ui` in your own **Next.js / Vite / React** app.
 
-## Getting Started
+### 1. Install
 
-### 1. Clone the repository
+```bash
+# npm
+npm install @sondor/ui
+
+# pnpm
+pnpm add @sondor/ui
+
+# yarn
+yarn add @sondor/ui
+```
+
+### 2. Import the stylesheet **once** (e.g. in your root layout)
+
+```tsx
+// app/layout.tsx (Next.js App Router)
+import "@sondor/ui/styles.css";
+```
+
+### 3. Use any widget
+
+```tsx
+import {
+  ConversationBranchingWidget,
+  TokenStreamInspectorWidget,
+  ModelComparisonArenaWidget,
+} from "@sondor/ui";
+
+export default function Page() {
+  return (
+    <main className="p-6 space-y-6">
+      <ConversationBranchingWidget />
+      <TokenStreamInspectorWidget />
+      <ModelComparisonArenaWidget />
+    </main>
+  );
+}
+```
+
+> ✅ All widgets ship with the `"use client"` directive baked in, so they work out of the box with the **Next.js App Router** (React Server Components).
+
+### Next.js: transpile the package (optional)
+
+If you run into ESM interop issues, add this to `next.config.ts`:
+
+```ts
+const nextConfig = {
+  transpilePackages: ["@sondor/ui"],
+};
+```
+
+See the full widget catalogue in [`packages/ui/README.md`](packages/ui/README.md).
+
+---
+
+## 🛠️ Running the Demo Locally
+
+Clone the repo to run the `apps/web` Next.js showcase.
+
+### Prerequisites
+
+- **Node.js** 18.18+ (20.x recommended)
+- **pnpm** 9.x — `npm install -g pnpm`
+
+### Setup
 
 ```bash
 git clone https://github.com/bilguunint/chatbot-uikit.git
 cd chatbot-uikit
-```
-
-### 2. Install dependencies
-
-This repo uses **pnpm workspaces**. Install [pnpm](https://pnpm.io/installation) first if you don't have it, then:
-
-```bash
 pnpm install
-```
-
-### 3. Run the development server
-
-```bash
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:3000](http://localhost:3000).
 
 ## Available Scripts
 
@@ -152,19 +210,6 @@ This repo is a **pnpm monorepo** with two workspaces:
 ├── .github/                          # CI, issue templates, PR template
 └── README.md, LICENSE, CHANGELOG.md, CONTRIBUTING.md, ...
 ```
-
-### Using the library in your own app
-
-```bash
-pnpm add @sondor/ui
-```
-
-```tsx
-import "@sondor/ui/styles.css";
-import { ConversationBranchingWidget } from "@sondor/ui";
-```
-
-See [`packages/ui/README.md`](packages/ui/README.md) for the full widget list and API.
 
 ## Deploy
 

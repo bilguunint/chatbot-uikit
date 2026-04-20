@@ -63,7 +63,8 @@
     "provenance": true
   },
   "scripts": {
-    "build": "tsup && pnpm run build:css",
+    "build": "tsup && pnpm run build:post",
+    "build:post": "node ./scripts/add-use-client.mjs && node ./scripts/copy-css.mjs",
     "build:css": "node ./scripts/copy-css.mjs",
     "dev": "tsup --watch",
     "lint": "eslint src",
