@@ -3,6 +3,8 @@
   <h1>Sondor UI</h1>
   <p><strong>Modern AI Chatbot UI Kit</strong></p>
 
+  [![npm version](https://img.shields.io/npm/v/sondor-ui?color=7c3aed&logo=npm)](https://www.npmjs.com/package/sondor-ui)
+  [![npm downloads](https://img.shields.io/npm/dm/sondor-ui?color=7c3aed)](https://www.npmjs.com/package/sondor-ui)
   ![Next.js](https://img.shields.io/badge/Next.js-16.2.4-black?logo=next.js)
   ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38bdf8?logo=tailwindcss&logoColor=white)
   ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178c6?logo=typescript&logoColor=white)
@@ -16,11 +18,11 @@
 
   <p>
     <a href="https://chatbot-uikit.vercel.app/"><strong>?? Live Demo</strong></a>
-    &nbsp;·&nbsp;
+    &nbsp;ï¿½&nbsp;
     <a href="#-quick-start-library">Quick Start</a>
-    &nbsp;·&nbsp;
+    &nbsp;ï¿½&nbsp;
     <a href="packages/ui/README.md">Library Docs</a>
-    &nbsp;·&nbsp;
+    &nbsp;ï¿½&nbsp;
     <a href="CONTRIBUTING.md">Contributing</a>
   </p>
 </div>
@@ -31,16 +33,16 @@ A modern, fully responsive AI chatbot interface built with **Next.js 16**, **Tai
 
 ## ?? Why Sondor UI?
 
-> **A production-ready UI kit for AI chatbots.** Save weeks of design & frontend work — so you can focus on the AI, not the pixels.
+> **A production-ready UI kit for AI chatbots.** Save weeks of design & frontend work ï¿½ so you can focus on the AI, not the pixels.
 
 Building an AI chatbot, agent dashboard, or LLM analytics tool? You shouldn't have to reinvent the UI every time. Sondor UI gives you a batteries-included, AI-first component library under the MIT license.
 
 ### Who is it for?
 
-- ?? **AI startups & indie hackers** — ship an OpenAI / Claude / Gemini wrapper in days, not weeks
-- ????? **Frontend developers** — drop-in components for client projects and portfolios
-- ?? **Enterprise teams** — internal AI assistants, admin panels, and LLM-powered dashboards
-- ?? **Learners** — study a real-world Tailwind v4 + React 19 codebase
+- ?? **AI startups & indie hackers** ï¿½ ship an OpenAI / Claude / Gemini wrapper in days, not weeks
+- ????? **Frontend developers** ï¿½ drop-in components for client projects and portfolios
+- ?? **Enterprise teams** ï¿½ internal AI assistants, admin panels, and LLM-powered dashboards
+- ?? **Learners** ï¿½ study a real-world Tailwind v4 + React 19 codebase
 
 ### What makes it different?
 
@@ -51,30 +53,30 @@ Building an AI chatbot, agent dashboard, or LLM analytics tool? You shouldn't ha
 | Next.js 16 + React 19 + Tailwind v4 | ?? | ?? | ? |
 | Full layout system (sidebar, theme, pages) | ? | ? | ? |
 | 6 accent themes + dark mode | ? | ?? | ? |
-| Price | Free | $149–$299 | **Free (MIT)** |
+| Price | Free | $149ï¿½$299 | **Free (MIT)** |
 
 ### Real-world use cases
 
-- **AI chatbot SaaS** — plug in the chat view, focus on backend prompting
-- **LLM observability dashboards** — `TokenStreamInspector`, `ModelComparisonArena`, `ContextMemoryVisualizer`
-- **Internal copilots** — brand-tunable admin UI for your team's AI tools
-- **Prototypes & demos** — clone, deploy to Vercel in under 5 minutes
+- **AI chatbot SaaS** ï¿½ plug in the chat view, focus on backend prompting
+- **LLM observability dashboards** ï¿½ `TokenStreamInspector`, `ModelComparisonArena`, `ContextMemoryVisualizer`
+- **Internal copilots** ï¿½ brand-tunable admin UI for your team's AI tools
+- **Prototypes & demos** ï¿½ clone, deploy to Vercel in under 5 minutes
 
 ## Screenshots
 
 <div align="center">
 
-### ?? Home — Chat Interface
+### ?? Home ï¿½ Chat Interface
 <img src="apps/web/public/assets/home-screen.png" width="700" alt="Home Screen">
 
 <br>
 
-### ?? Explore — AI Assistants
+### ?? Explore ï¿½ AI Assistants
 <img src="apps/web/public/assets/explore-screen.png" width="700" alt="Explore Screen">
 
 <br>
 
-### ?? Widgets — Dashboard Components
+### ?? Widgets ï¿½ Dashboard Components
 <img src="apps/web/public/assets/widgets-screen.png" width="700" alt="Widgets Screen">
 
 <br>
@@ -86,14 +88,14 @@ Building an AI chatbot, agent dashboard, or LLM analytics tool? You shouldn't ha
 
 ## Features
 
-- **Multi-page layout** — Home, Explore, Library, Files, History, Widgets, Theme, Profile
-- **AI model selector** — Switch between 6 AI models (Sondor 4o, Ultra, Vision, Code, Mini, Reason)
-- **Theme system** — Light / Dark / System mode with 6 accent colors (Purple, Blue, Emerald, Rose, Amber, Cyan)
-- **Collapsible sidebar** — Full navigation with expand/collapse support
-- **32+ widget components** — Pre-built UI widgets for dashboards
-- **Profile page** — User profile, usage stats, and settings
-- **Chat history** — Organized by Today, Yesterday, and 7 days
-- **Dark mode** — Fully supported across all pages and components
+- **Multi-page layout** ï¿½ Home, Explore, Library, Files, History, Widgets, Theme, Profile
+- **AI model selector** ï¿½ Switch between 6 AI models (Sondor 4o, Ultra, Vision, Code, Mini, Reason)
+- **Theme system** ï¿½ Light / Dark / System mode with 6 accent colors (Purple, Blue, Emerald, Rose, Amber, Cyan)
+- **Collapsible sidebar** ï¿½ Full navigation with expand/collapse support
+- **32+ widget components** ï¿½ Pre-built UI widgets for dashboards
+- **Profile page** ï¿½ User profile, usage stats, and settings
+- **Chat history** ï¿½ Organized by Today, Yesterday, and 7 days
+- **Dark mode** ï¿½ Fully supported across all pages and components
 
 ## Tech Stack
 
@@ -172,7 +174,7 @@ Clone the repo to run the `apps/web` Next.js showcase.
 ### Prerequisites
 
 - **Node.js** 18.18+ (20.x recommended)
-- **pnpm** 9.x — `npm install -g pnpm`
+- **pnpm** 9.x ï¿½ `npm install -g pnpm`
 
 ### Setup
 
@@ -201,41 +203,41 @@ Open [http://localhost:3000](http://localhost:3000).
 
 This repo is a **pnpm monorepo** with two workspaces:
 
-- **`packages/ui`** — the publishable library `sondor-ui` (all widget components).
-- **`apps/web`** — the Next.js demo / documentation site that consumes `sondor-ui` via a `workspace:*` dependency.
+- **`packages/ui`** ï¿½ the publishable library `sondor-ui` (all widget components).
+- **`apps/web`** ï¿½ the Next.js demo / documentation site that consumes `sondor-ui` via a `workspace:*` dependency.
 
 ```
 .
 +-- apps/
-¦   +-- web/                          # Next.js 16 demo (@sondor/web)
-¦       +-- next.config.ts            # transpilePackages: ["sondor-ui"]
-¦       +-- package.json
-¦       +-- src/
-¦           +-- app/                  # App Router
-¦           +-- components/layout/    # Sidebar
-¦           +-- contexts/             # ThemeProvider
-¦           +-- features/             # chat, widgets, explore, files, history, library, profile, theme
-¦           +-- lib/                  # Mock data
-¦           +-- types/
-¦
+ï¿½   +-- web/                          # Next.js 16 demo (@sondor/web)
+ï¿½       +-- next.config.ts            # transpilePackages: ["sondor-ui"]
+ï¿½       +-- package.json
+ï¿½       +-- src/
+ï¿½           +-- app/                  # App Router
+ï¿½           +-- components/layout/    # Sidebar
+ï¿½           +-- contexts/             # ThemeProvider
+ï¿½           +-- features/             # chat, widgets, explore, files, history, library, profile, theme
+ï¿½           +-- lib/                  # Mock data
+ï¿½           +-- types/
+ï¿½
 +-- packages/
-¦   +-- ui/                           # Publishable library (sondor-ui)
-¦       +-- tsup.config.ts            # ESM + CJS + .d.ts bundler
-¦       +-- tsconfig.json
-¦       +-- scripts/copy-css.mjs      # Copies styles.css into dist/
-¦       +-- package.json              # exports ".", "./widgets", "./styles.css"
-¦       +-- src/
-¦           +-- index.ts              # Public entry (re-exports widgets)
-¦           +-- styles.css            # Design tokens (Tailwind v4 @theme)
-¦           +-- widgets/
-¦               +-- index.ts
-¦               +-- aiKitWidgets.tsx
-¦               +-- chatWidgets.tsx
-¦               +-- controlsWidgets.tsx
-¦               +-- dataWidgets.tsx
-¦               +-- feedbackWidgets.tsx
-¦               +-- profileWidgets.tsx
-¦
+ï¿½   +-- ui/                           # Publishable library (sondor-ui)
+ï¿½       +-- tsup.config.ts            # ESM + CJS + .d.ts bundler
+ï¿½       +-- tsconfig.json
+ï¿½       +-- scripts/copy-css.mjs      # Copies styles.css into dist/
+ï¿½       +-- package.json              # exports ".", "./widgets", "./styles.css"
+ï¿½       +-- src/
+ï¿½           +-- index.ts              # Public entry (re-exports widgets)
+ï¿½           +-- styles.css            # Design tokens (Tailwind v4 @theme)
+ï¿½           +-- widgets/
+ï¿½               +-- index.ts
+ï¿½               +-- aiKitWidgets.tsx
+ï¿½               +-- chatWidgets.tsx
+ï¿½               +-- controlsWidgets.tsx
+ï¿½               +-- dataWidgets.tsx
+ï¿½               +-- feedbackWidgets.tsx
+ï¿½               +-- profileWidgets.tsx
+ï¿½
 +-- pnpm-workspace.yaml
 +-- package.json                      # Workspace root scripts
 +-- .github/                          # CI, issue templates, PR template
@@ -250,7 +252,7 @@ This repo is a **pnpm monorepo** with two workspaces:
 npm run build
 ```
 
-Deploy to [Vercel](https://vercel.com) with zero configuration — it auto-detects Next.js.
+Deploy to [Vercel](https://vercel.com) with zero configuration ï¿½ it auto-detects Next.js.
 
 ### Docker / Self-hosted
 
