@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+**/node_modules
 /.pnp
 .pnp.*
 .yarn/*
@@ -10,19 +11,19 @@
 !.yarn/releases
 !.yarn/versions
 
+# build output
+**/dist
+**/.next/
+/out/
+**/.turbo
+
 # testing
 /coverage
-
-# next.js
-/.next/
-/out/
-
-# production
-/build
 
 # misc
 .DS_Store
 *.pem
+.vscode/
 
 # debug
 npm-debug.log*

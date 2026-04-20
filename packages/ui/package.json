@@ -1,0 +1,89 @@
+{
+  "name": "@sondor/ui",
+  "version": "0.1.0",
+  "description": "Modern, accessible AI Chatbot UI Kit — 30+ ready-to-use widgets built with React 19, Tailwind CSS v4 and TypeScript.",
+  "keywords": [
+    "ai",
+    "chatbot",
+    "ui-kit",
+    "components",
+    "react",
+    "tailwindcss",
+    "typescript",
+    "chat-ui",
+    "llm",
+    "widgets"
+  ],
+  "author": {
+    "name": "Bilguun",
+    "url": "https://github.com/bilguunint"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/bilguunint/chatbot-uikit#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bilguunint/chatbot-uikit.git",
+    "directory": "packages/ui"
+  },
+  "bugs": {
+    "url": "https://github.com/bilguunint/chatbot-uikit/issues"
+  },
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./widgets": {
+      "types": "./dist/widgets/index.d.ts",
+      "import": "./dist/widgets/index.js",
+      "require": "./dist/widgets/index.cjs"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "engines": {
+    "node": ">=18.18.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "build": "tsup && pnpm run build:css",
+    "build:css": "node ./scripts/copy-css.mjs",
+    "dev": "tsup --watch",
+    "lint": "eslint src",
+    "clean": "rimraf dist",
+    "prepublishOnly": "pnpm run build"
+  },
+  "peerDependencies": {
+    "react": ">=18.2.0",
+    "react-dom": ">=18.2.0"
+  },
+  "dependencies": {
+    "lucide-react": "^1.8.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "rimraf": "^6.0.1",
+    "tsup": "^8.3.5",
+    "typescript": "^5"
+  }
+}

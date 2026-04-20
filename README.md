@@ -82,14 +82,16 @@ cd chatbot-uikit
 
 ### 2. Install dependencies
 
+This repo uses **pnpm workspaces**. Install [pnpm](https://pnpm.io/installation) first if you don't have it, then:
+
 ```bash
-npm install
+pnpm install
 ```
 
 ### 3. Run the development server
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
@@ -98,44 +100,71 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 | Command | Description |
 |---|---|
-| `npm run dev` | Start development server with hot reload |
-| `npm run build` | Create optimized production build |
-| `npm run start` | Start production server |
-| `npm run lint` | Run ESLint for code quality checks |
+| `pnpm dev` | Start the demo's development server (`apps/web`) |
+| `pnpm build` | Build the UI library (`packages/ui`) and then the demo |
+| `pnpm build:ui` | Build only the UI library (tsup → ESM + CJS + `.d.ts`) |
+| `pnpm build:web` | Build only the Next.js demo |
+| `pnpm start` | Start the demo's production server |
+| `pnpm lint` | Run ESLint across all workspaces |
+| `pnpm clean` | Remove `dist/`, `.next/`, and `node_modules/` in all packages |
 
 ## Project Structure
 
+This repo is a **pnpm monorepo** with two workspaces:
+
+- **`packages/ui`** — the publishable library `@sondor/ui` (all widget components).
+- **`apps/web`** — the Next.js demo / documentation site that consumes `@sondor/ui` via a `workspace:*` dependency.
+
 ```
-src/
-├── app/
-│   ├── globals.css          # Theme variables & Tailwind config
-│   ├── layout.tsx           # Root layout with ThemeProvider
-│   └── page.tsx             # Main page with view routing
-├── components/
-│   ├── ThemeProvider.tsx     # Theme context (mode, accent color)
-│   ├── Sidebar.tsx          # Collapsible navigation sidebar
-│   ├── MainContent.tsx      # Chat interface with model selector
-│   ├── ExploreContent.tsx   # Explore page
-│   ├── LibraryContent.tsx   # Library page
-│   ├── FilesContent.tsx     # Files page
-│   ├── HistoryContent.tsx   # Chat history page
-│   ├── WidgetsContent.tsx   # Widget components showcase
-│   ├── ThemeContent.tsx     # Theme settings page
-│   └── ProfileContent.tsx   # User profile & settings
-public/
-└── assets/
-    └── logo-{color}.png     # Per-theme logo variants
+.
+├── apps/
+│   └── web/                          # Next.js 16 demo (@sondor/web)
+│       ├── next.config.ts            # transpilePackages: ["@sondor/ui"]
+│       ├── package.json
+│       └── src/
+│           ├── app/                  # App Router
+│           ├── components/layout/    # Sidebar
+│           ├── contexts/             # ThemeProvider
+│           ├── features/             # chat, widgets, explore, files, history, library, profile, theme
+│           ├── lib/                  # Mock data
+│           └── types/
+│
+├── packages/
+│   └── ui/                           # Publishable library (@sondor/ui)
+│       ├── tsup.config.ts            # ESM + CJS + .d.ts bundler
+│       ├── tsconfig.json
+│       ├── scripts/copy-css.mjs      # Copies styles.css into dist/
+│       ├── package.json              # exports ".", "./widgets", "./styles.css"
+│       └── src/
+│           ├── index.ts              # Public entry (re-exports widgets)
+│           ├── styles.css            # Design tokens (Tailwind v4 @theme)
+│           └── widgets/
+│               ├── index.ts
+│               ├── aiKitWidgets.tsx
+│               ├── chatWidgets.tsx
+│               ├── controlsWidgets.tsx
+│               ├── dataWidgets.tsx
+│               ├── feedbackWidgets.tsx
+│               └── profileWidgets.tsx
+│
+├── pnpm-workspace.yaml
+├── package.json                      # Workspace root scripts
+├── .github/                          # CI, issue templates, PR template
+└── README.md, LICENSE, CHANGELOG.md, CONTRIBUTING.md, ...
 ```
 
-## Customization
+### Using the library in your own app
 
-### Accent Colors
+```bash
+pnpm add @sondor/ui
+```
 
-Edit `src/components/ThemeProvider.tsx` to add or modify accent colors. Each color requires a full shade palette (50–900).
+```tsx
+import "@sondor/ui/styles.css";
+import { ConversationBranchingWidget } from "@sondor/ui";
+```
 
-### Theme Variables
-
-All CSS variables are defined in `src/app/globals.css` using Tailwind CSS v4's `@theme` directive with dark mode overrides.
+See [`packages/ui/README.md`](packages/ui/README.md) for the full widget list and API.
 
 ## Deploy
 
