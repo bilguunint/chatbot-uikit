@@ -1,5 +1,5 @@
-<div align="center">
-  <img src="public/assets/logo-purple.png" height="80" alt="Sondor UI">
+﻿<div align="center">
+  <img src="apps/web/public/assets/logo-purple.png" height="80" alt="Sondor UI">
   <h1>Sondor UI</h1>
   <p><strong>Modern AI Chatbot UI Kit</strong></p>
 
@@ -10,7 +10,7 @@
 
   <br>
 
-  <img src="public/assets/intro.png" width="700" alt="Sondor AI Screenshot" style="border-radius: 12px;">
+  <img src="apps/web/public/assets/intro.png" width="700" alt="Sondor AI Screenshot" style="border-radius: 12px;">
 
   <br><br>
 
@@ -26,22 +26,22 @@ A modern, fully responsive AI chatbot interface built with **Next.js 16**, **Tai
 <div align="center">
 
 ### 🏠 Home — Chat Interface
-<img src="public/assets/home-screen.png" width="700" alt="Home Screen">
+<img src="apps/web/public/assets/home-screen.png" width="700" alt="Home Screen">
 
 <br>
 
 ### 🧭 Explore — AI Assistants
-<img src="public/assets/explore-screen.png" width="700" alt="Explore Screen">
+<img src="apps/web/public/assets/explore-screen.png" width="700" alt="Explore Screen">
 
 <br>
 
 ### 🧩 Widgets — Dashboard Components
-<img src="public/assets/widgets-screen.png" width="700" alt="Widgets Screen">
+<img src="apps/web/public/assets/widgets-screen.png" width="700" alt="Widgets Screen">
 
 <br>
 
 ### 💬 Chat Response Types
-<img src="public/assets/response-types.png" width="700" alt="Chat Response Types">
+<img src="apps/web/public/assets/response-types.png" width="700" alt="Chat Response Types">
 
 </div>
 
