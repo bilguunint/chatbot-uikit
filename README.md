@@ -10,7 +10,7 @@
 
   <br>
 
-  <img src="public/assets/home-screen.png" width="700" alt="Sondor AI Screenshot" style="border-radius: 12px;">
+  <img src="public/assets/intro.png" width="700" alt="Sondor AI Screenshot" style="border-radius: 12px;">
 
   <br><br>
 
