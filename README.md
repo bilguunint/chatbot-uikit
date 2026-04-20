@@ -29,6 +29,37 @@
 
 A modern, fully responsive AI chatbot interface built with **Next.js 16**, **Tailwind CSS v4**, **TypeScript**, and **Lucide React** icons. Designed as a production-ready UI kit for AI-powered chat applications.
 
+## 💡 Why Sondor UI?
+
+> **The shadcn/ui for AI chatbots.** A production-ready UI kit that saves you weeks of design & frontend work — so you can focus on the AI, not the pixels.
+
+Building an AI chatbot, agent dashboard, or LLM analytics tool? You shouldn't have to reinvent the UI every time. Sondor UI gives you a batteries-included, AI-first component library under the MIT license.
+
+### Who is it for?
+
+- 🚀 **AI startups & indie hackers** — ship an OpenAI / Claude / Gemini wrapper in days, not weeks
+- 🧑‍💻 **Frontend developers** — drop-in components for client projects and portfolios
+- 🏢 **Enterprise teams** — internal AI assistants, admin panels, and LLM-powered dashboards
+- 🎓 **Learners** — study a real-world Tailwind v4 + React 19 codebase
+
+### What makes it different?
+
+| | Generic UI kits<br/>(shadcn, MUI) | Premium kits<br/>($$$) | **Sondor UI** |
+|---|:-:|:-:|:-:|
+| Chatbot-first components | ❌ | ⚠️ | ✅ |
+| Conversation branching, token stream, model arena | ❌ | ❌ | ✅ |
+| Next.js 16 + React 19 + Tailwind v4 | ⚠️ | ⚠️ | ✅ |
+| Full layout system (sidebar, theme, pages) | ❌ | ✅ | ✅ |
+| 6 accent themes + dark mode | ❌ | ⚠️ | ✅ |
+| Price | Free | $149–$299 | **Free (MIT)** |
+
+### Real-world use cases
+
+- **AI chatbot SaaS** — plug in the chat view, focus on backend prompting
+- **LLM observability dashboards** — `TokenStreamInspector`, `ModelComparisonArena`, `ContextMemoryVisualizer`
+- **Internal copilots** — brand-tunable admin UI for your team's AI tools
+- **Prototypes & demos** — clone, deploy to Vercel in under 5 minutes
+
 ## Screenshots
 
 <div align="center">
