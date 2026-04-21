@@ -177,7 +177,7 @@ export default function ChatView({ onMobileMenuOpen }: { onMobileMenuOpen?: () =
           setTypingText("");
           const message =
             err instanceof Error ? err.message : "Unknown error contacting AI service";
-          toast("AI request failed", { type: "error", description: message });
+          toast("AI request failed", { type: "warning", description: message });
           setMessages((prev) => [
             ...prev,
             {
