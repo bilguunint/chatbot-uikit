@@ -17,7 +17,7 @@
   <br><br>
 
   <p>
-    <a href="https://sondor-ai-chatbot.vercel.app/"><strong>🔴 Live demo</strong></a>
+    <a href="https://chatbot-uikit.vercel.app/"><strong>🔴 Live demo</strong></a>
     &nbsp;·&nbsp;
     <a href="#-quick-start">Quick start</a>
     &nbsp;·&nbsp;

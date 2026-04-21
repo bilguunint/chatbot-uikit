@@ -334,7 +334,7 @@ export default function ChatView({ onMobileMenuOpen }: { onMobileMenuOpen?: () =
   };
 
   const handleShare = async () => {
-    const url = typeof window !== "undefined" ? window.location.href : "https://sondor-ai-chatbot.vercel.app";
+    const url = typeof window !== "undefined" ? window.location.href : "https://chatbot-uikit.vercel.app";
     try {
       await navigator.clipboard.writeText(url);
       toast("Link copied", { type: "success", description: "Share URL copied to clipboard" });
