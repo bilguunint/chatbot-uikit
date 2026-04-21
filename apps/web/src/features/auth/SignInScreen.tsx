@@ -5,7 +5,12 @@ import { LogOut, RefreshCw, Sparkles } from "lucide-react";
 
 import { useFirebase } from "@/contexts/FirebaseProvider";
 
-export default function SignInScreen() {
+/**
+ * The sign-in card. Used both as a full-page screen and embedded inside the
+ * `AuthModal`, so it renders only the card itself — the caller decides how to
+ * lay it out.
+ */
+export function SignInCard() {
   const { signInWithGoogle, resetConfig, config, configSource, error } = useFirebase();
   const [busy, setBusy] = useState(false);
   const [localError, setLocalError] = useState<string | null>(null);
@@ -25,52 +30,60 @@ export default function SignInScreen() {
   const errorMessage = localError ?? error;
 
   return (
-    <main className="min-h-screen w-full flex items-center justify-center bg-background px-4 py-10">
-      <div className="w-full max-w-[420px] rounded-2xl border border-border-light bg-card p-8 text-center">
-        <div className="mx-auto w-14 h-14 rounded-2xl flex items-center justify-center bg-primary-500/15 text-primary-500 mb-5">
-          <Sparkles className="w-7 h-7" />
+    <div className="w-full rounded-2xl border border-border-light bg-card p-8 text-center">
+      <div className="mx-auto w-14 h-14 rounded-2xl flex items-center justify-center bg-primary-500/15 text-primary-500 mb-5">
+        <Sparkles className="w-7 h-7" />
+      </div>
+      <h1 className="text-[20px] font-bold text-text-primary mb-1">Sign in to Sondor</h1>
+      <p className="text-[13px] text-text-secondary mb-6">
+        You&apos;re connected to Firebase project{" "}
+        <span className="font-mono text-text-primary">{config?.projectId ?? "—"}</span>.
+        Sign in to start chatting.
+      </p>
+
+      <button
+        type="button"
+        onClick={handleSignIn}
+        disabled={busy}
+        className="w-full inline-flex items-center justify-center gap-3 px-4 py-2.5 rounded-lg border border-border-light bg-input-bg text-text-primary text-[14px] font-medium hover:bg-hover-bg disabled:opacity-60 disabled:cursor-not-allowed enabled:cursor-pointer transition-colors"
+      >
+        <GoogleIcon className="w-5 h-5" />
+        {busy ? "Opening Google…" : "Continue with Google"}
+      </button>
+
+      {errorMessage && (
+        <div className="mt-4 rounded-lg border border-rose-500/30 bg-rose-500/10 px-3 py-2 text-[12.5px] text-rose-500 text-left">
+          {errorMessage}
         </div>
-        <h1 className="text-[20px] font-bold text-text-primary mb-1">Sign in to Sondor</h1>
-        <p className="text-[13px] text-text-secondary mb-6">
-          You&apos;re connected to Firebase project{" "}
-          <span className="font-mono text-text-primary">{config?.projectId ?? "—"}</span>.
-          Sign in to start chatting.
-        </p>
+      )}
 
-        <button
-          type="button"
-          onClick={handleSignIn}
-          disabled={busy}
-          className="w-full inline-flex items-center justify-center gap-3 px-4 py-2.5 rounded-lg border border-border-light bg-input-bg text-text-primary text-[14px] font-medium hover:bg-hover-bg disabled:opacity-60 disabled:cursor-not-allowed enabled:cursor-pointer transition-colors"
-        >
-          <GoogleIcon className="w-5 h-5" />
-          {busy ? "Opening Google…" : "Continue with Google"}
-        </button>
-
-        {errorMessage && (
-          <div className="mt-4 rounded-lg border border-rose-500/30 bg-rose-500/10 px-3 py-2 text-[12.5px] text-rose-500 text-left">
-            {errorMessage}
-          </div>
-        )}
-
-        <div className="mt-6 pt-4 border-t border-border-light flex items-center justify-between text-[12px] text-text-muted">
-          {configSource === "env" ? (
-            <span className="inline-flex items-center gap-1.5">
-              <RefreshCw className="w-3.5 h-3.5" /> Configured via environment variables
-            </span>
-          ) : (
-            <button
-              type="button"
-              onClick={resetConfig}
-              className="inline-flex items-center gap-1.5 hover:text-text-primary cursor-pointer"
-            >
-              <RefreshCw className="w-3.5 h-3.5" /> Use a different Firebase project
-            </button>
-          )}
+      <div className="mt-6 pt-4 border-t border-border-light flex items-center justify-between text-[12px] text-text-muted">
+        {configSource === "env" ? (
           <span className="inline-flex items-center gap-1.5">
-            <LogOut className="w-3.5 h-3.5" /> Stays in your browser
+            <RefreshCw className="w-3.5 h-3.5" /> Configured via environment variables
           </span>
-        </div>
+        ) : (
+          <button
+            type="button"
+            onClick={resetConfig}
+            className="inline-flex items-center gap-1.5 hover:text-text-primary cursor-pointer"
+          >
+            <RefreshCw className="w-3.5 h-3.5" /> Use a different Firebase project
+          </button>
+        )}
+        <span className="inline-flex items-center gap-1.5">
+          <LogOut className="w-3.5 h-3.5" /> Stays in your browser
+        </span>
+      </div>
+    </div>
+  );
+}
+
+export default function SignInScreen() {
+  return (
+    <main className="min-h-screen w-full flex items-center justify-center bg-background px-4 py-10">
+      <div className="w-full max-w-[420px]">
+        <SignInCard />
       </div>
     </main>
   );
