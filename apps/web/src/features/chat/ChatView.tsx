@@ -211,11 +211,29 @@ export default function ChatView({ onMobileMenuOpen }: { onMobileMenuOpen?: () =
           setTypingText("");
           const message =
             err instanceof Error ? err.message : "Unknown error contacting AI service";
-          toast("AI request failed", { type: "warning", description: message });
+          // Treat missing/invalid API keys (and any upstream failure) as a
+          // demo-mode signal: surface a friendly toast and reply with the
+          // built-in mock response instead of crashing the conversation.
+          const lower = message.toLowerCase();
+          const isKeyIssue =
+            lower.includes("api_key") ||
+            lower.includes("api key") ||
+            lower.includes("not configured") ||
+            lower.includes("401") ||
+            lower.includes("403") ||
+            lower.includes("unauthorized") ||
+            lower.includes("invalid_api_key");
+          toast(isKeyIssue ? "Demo mode" : "AI request failed", {
+            type: isKeyIssue ? "info" : "warning",
+            description: isKeyIssue
+              ? "No valid AI API key — replying with a sample response."
+              : message,
+          });
+          const thinkTime = Math.max(1, Math.round((Date.now() - startedAt) / 1000));
           appendMessage(conversationId, {
             role: "assistant",
-            content: `⚠️ ${message}`,
-            thinkingTime: 0,
+            content: getMockResponse(userMsg),
+            thinkingTime: thinkTime,
             responseType: "default",
           }).catch(() => undefined);
         }
