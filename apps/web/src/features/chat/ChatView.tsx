@@ -28,6 +28,8 @@ import {
 import { useTheme } from "@/contexts/ThemeProvider";
 import { useToast } from "@/contexts/ToastProvider";
 import { useChatStore } from "@/contexts/ChatStoreProvider";
+import { useUserProfile } from "@/contexts/UserProfileProvider";
+import { useFirebase } from "@/contexts/FirebaseProvider";
 import type { ResponseType, ChatMessage } from "@/types";
 import { aiModels, researchOptions, suggestions, getMockResponse, getMockTypedResponse } from "@/lib/mockData";
 import { UserBubble, AssistantBubble, CodeBubble, FileBubble, AudioBubble, ImageBubble } from "./components/bubbles";
@@ -41,6 +43,13 @@ export default function ChatView({ onMobileMenuOpen }: { onMobileMenuOpen?: () =
     createConversation,
     appendMessage,
   } = useChatStore();
+  const { profile } = useUserProfile();
+  const { user } = useFirebase();
+
+  const firstName =
+    profile?.firstName?.trim() ||
+    (profile?.displayName || user?.displayName || "").trim().split(/\s+/)[0] ||
+    "there";
 
   const [view, setView] = useState<"home" | "chat">(activeConversationId ? "chat" : "home");
   const [inputValue, setInputValue] = useState("");
@@ -480,7 +489,7 @@ export default function ChatView({ onMobileMenuOpen }: { onMobileMenuOpen?: () =
 
           {/* Greeting */}
           <h2 className="text-[18px] sm:text-[22px] font-normal bg-gradient-to-r from-primary-400 to-primary-300 bg-clip-text text-transparent mb-1">
-            Hello, Bilguun
+            Hello, {firstName}
           </h2>
           <h1 className="text-[22px] sm:text-[28px] font-bold text-text-primary mb-8">
             How can I assist you today?
