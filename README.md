@@ -50,10 +50,8 @@ Everything runs on your infrastructure. No vendor lock-in, no telemetry, no hidd
 
 <div align="center">
 <table>
-<tr>
-<td align="center"><img src="apps/web/public/assets/default-theme.png" width="380" alt="Default theme"><br><sub><b>Default</b></sub></td>
-<td align="center"><img src="apps/web/public/assets/zyricon-theme.png" width="380" alt="Zyricon theme"><br><sub><b>Zyricon</b></sub></td>
-</tr>
+<tr><td align="center"><img src="apps/web/public/assets/default-theme.png" width="780" alt="Default theme"><br><sub><b>Default</b></sub></td></tr>
+<tr><td align="center"><img src="apps/web/public/assets/zyricon-theme.png" width="780" alt="Zyricon theme"><br><sub><b>Zyricon</b></sub></td></tr>
 </table>
 </div>
 
