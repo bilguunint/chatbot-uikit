@@ -46,6 +46,17 @@ Everything runs on your infrastructure. No vendor lock-in, no telemetry, no hidd
 
 ## 📸 Screenshots
 
+**Two built-in themes** — switch instantly from the sidebar:
+
+<div align="center">
+<table>
+<tr>
+<td align="center"><img src="apps/web/public/assets/default-theme.png" width="380" alt="Default theme"><br><sub><b>Default</b></sub></td>
+<td align="center"><img src="apps/web/public/assets/zyricon-theme.png" width="380" alt="Zyricon theme"><br><sub><b>Zyricon</b></sub></td>
+</tr>
+</table>
+</div>
+
 <div align="center">
 <table>
 <tr>
