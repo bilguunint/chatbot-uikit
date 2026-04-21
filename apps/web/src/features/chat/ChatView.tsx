@@ -454,7 +454,7 @@ export default function ChatView({ onMobileMenuOpen }: { onMobileMenuOpen?: () =
           </button>
           <button
             onClick={() => setShowPricing(true)}
-            className="px-3 sm:px-4 py-1.5 rounded-lg bg-text-primary text-background text-[12px] sm:text-[13px] font-medium hover:opacity-90 transition-colors cursor-pointer"
+            className="px-3 sm:px-4 py-1.5 rounded-lg bg-primary-500 hover:bg-primary-600 text-white text-[12px] sm:text-[13px] font-medium transition-colors cursor-pointer"
           >
             Upgrade
           </button>

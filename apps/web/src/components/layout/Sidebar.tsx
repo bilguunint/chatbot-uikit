@@ -21,6 +21,7 @@ import { useTheme } from "@/contexts/ThemeProvider";
 import { useToast } from "@/contexts/ToastProvider";
 import { useChatStore } from "@/contexts/ChatStoreProvider";
 import { useFirebase } from "@/contexts/FirebaseProvider";
+import { useUserProfile } from "@/contexts/UserProfileProvider";
 import type { Conversation } from "@/lib/firebase/chats";
 import type { ActiveView } from "@/types";
 
@@ -81,10 +82,12 @@ export default function Sidebar({
   const { toast } = useToast();
   const { conversations, activeConversationId } = useChatStore();
   const { user, signOut } = useFirebase();
+  const { profile } = useUserProfile();
 
   const groups = useMemo(() => groupConversations(conversations), [conversations]);
-  const displayName = user?.displayName ?? "Anonymous";
-  const email = user?.email ?? "";
+  const displayName = profile?.displayName || user?.displayName || "Anonymous";
+  const email = profile?.email || user?.email || "";
+  const photoURL = profile?.photoURL || user?.photoURL || "";
   const initials = (displayName || "S A")
     .split(/\s+/)
     .map((p) => p[0])
@@ -147,6 +150,7 @@ export default function Sidebar({
                 displayName={displayName}
                 email={email}
                 initials={initials}
+                photoURL={photoURL}
                 onNewChat={onNewChat}
                 onNavigate={onNavigate}
                 onSelectConversation={handleConversationClick}
@@ -224,10 +228,15 @@ export default function Sidebar({
         <div className="pb-3">
           <button
             onClick={() => onNavigate?.("profile" as ActiveView)}
-            className="w-8 h-8 rounded-full bg-gradient-to-br from-primary-300 to-primary-500 flex items-center justify-center text-white text-[11px] font-semibold cursor-pointer hover:opacity-80 transition-opacity"
+            className="w-8 h-8 rounded-full overflow-hidden bg-gradient-to-br from-primary-300 to-primary-500 flex items-center justify-center text-white text-[11px] font-semibold cursor-pointer hover:opacity-80 transition-opacity"
             title="Profile"
           >
-            BN
+            {photoURL ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={photoURL} alt={displayName} className="w-full h-full object-cover" />
+            ) : (
+              initials || "SA"
+            )}
           </button>
         </div>
       </aside>
@@ -258,6 +267,7 @@ export default function Sidebar({
               displayName={displayName}
               email={email}
               initials={initials}
+              photoURL={photoURL}
               onNewChat={onNewChat}
               onNavigate={onNavigate}
               onSelectConversation={handleConversationClick}
@@ -362,8 +372,13 @@ export default function Sidebar({
             onClick={() => onNavigate?.("profile" as ActiveView)}
             className="flex items-center gap-2.5 flex-1 min-w-0 hover:opacity-80 transition-opacity cursor-pointer"
           >
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary-300 to-primary-500 flex items-center justify-center text-white text-[11px] font-semibold shrink-0">
-              {initials || "SA"}
+            <div className="w-8 h-8 rounded-full overflow-hidden bg-gradient-to-br from-primary-300 to-primary-500 flex items-center justify-center text-white text-[11px] font-semibold shrink-0">
+              {photoURL ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={photoURL} alt={displayName} className="w-full h-full object-cover" />
+              ) : (
+                initials || "SA"
+              )}
             </div>
             <div className="flex-1 min-w-0 text-left">
               <p className="text-[13px] font-medium text-text-primary truncate">
@@ -391,6 +406,7 @@ function MobileSidebarContent({
   displayName,
   email,
   initials,
+  photoURL,
   onNewChat,
   onNavigate,
   onSelectConversation,
@@ -404,6 +420,7 @@ function MobileSidebarContent({
   displayName: string;
   email: string;
   initials: string;
+  photoURL: string;
   onNewChat?: () => void;
   onNavigate?: (view: ActiveView) => void;
   onSelectConversation: (id: string) => void;
@@ -464,7 +481,14 @@ function MobileSidebarContent({
       <div className="px-3 py-3 border-t border-border-light flex items-center gap-2">
         <button onClick={() => onNavigate?.("profile" as ActiveView)}
           className="flex items-center gap-2.5 flex-1 hover:opacity-80 transition-opacity cursor-pointer">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary-300 to-primary-500 flex items-center justify-center text-white text-[11px] font-semibold shrink-0">{initials || "SA"}</div>
+          <div className="w-8 h-8 rounded-full overflow-hidden bg-gradient-to-br from-primary-300 to-primary-500 flex items-center justify-center text-white text-[11px] font-semibold shrink-0">
+            {photoURL ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={photoURL} alt={displayName} className="w-full h-full object-cover" />
+            ) : (
+              initials || "SA"
+            )}
+          </div>
           <div className="text-left min-w-0">
             <p className="text-[13px] font-medium text-text-primary truncate">{displayName}</p>
             <p className="text-[11px] text-text-muted truncate">{email}</p>

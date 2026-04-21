@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/contexts/ThemeProvider";
 import { ToastProvider } from "@/contexts/ToastProvider";
 import { FirebaseProvider } from "@/contexts/FirebaseProvider";
 import { ChatStoreProvider } from "@/contexts/ChatStoreProvider";
+import { UserProfileProvider } from "@/contexts/UserProfileProvider";
 import AuthGate from "@/components/AuthGate";
 
 const inter = Inter({
@@ -29,7 +30,9 @@ export default function RootLayout({
           <ToastProvider>
             <FirebaseProvider>
               <AuthGate>
-                <ChatStoreProvider>{children}</ChatStoreProvider>
+                <UserProfileProvider>
+                  <ChatStoreProvider>{children}</ChatStoreProvider>
+                </UserProfileProvider>
               </AuthGate>
             </FirebaseProvider>
           </ToastProvider>
