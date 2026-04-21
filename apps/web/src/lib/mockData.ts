@@ -10,13 +10,24 @@ import {
 } from "lucide-react";
 import type { ResponseType } from "@/types";
 
-export const aiModels = [
-  { id: "sondor-4o", name: "Sondor 4o", desc: "Fastest model for everyday tasks", badge: null },
-  { id: "sondor-ultra", name: "Sondor Ultra", desc: "Deep reasoning for complex problems", badge: "Pro" },
-  { id: "sondor-vision", name: "Sondor Vision", desc: "Analyze images and visual content", badge: null },
-  { id: "sondor-code", name: "Sondor Code", desc: "Specialized in writing and debugging code", badge: null },
-  { id: "sondor-mini", name: "Sondor Mini", desc: "Lightweight and fast responses", badge: "Free" },
-  { id: "sondor-reason", name: "Sondor Reason", desc: "Logic, math, and scientific reasoning", badge: "New" },
+export type AiProvider = "openai" | "anthropic" | "gemini";
+
+export interface AiModelOption {
+  id: string;
+  name: string;
+  desc: string;
+  badge: string | null;
+  provider: AiProvider;
+  model: string;
+}
+
+export const aiModels: AiModelOption[] = [
+  { id: "gpt-4o-mini", name: "GPT-4o mini", desc: "Fast, cheap OpenAI model for everyday tasks", badge: null, provider: "openai", model: "gpt-4o-mini" },
+  { id: "gpt-4o", name: "GPT-4o", desc: "OpenAI flagship multimodal model", badge: "Pro", provider: "openai", model: "gpt-4o" },
+  { id: "claude-3-5-sonnet", name: "Claude 3.5 Sonnet", desc: "Anthropic's balanced reasoning model", badge: null, provider: "anthropic", model: "claude-3-5-sonnet-latest" },
+  { id: "claude-3-5-haiku", name: "Claude 3.5 Haiku", desc: "Anthropic's fast, lightweight model", badge: "Fast", provider: "anthropic", model: "claude-3-5-haiku-latest" },
+  { id: "gemini-1-5-pro", name: "Gemini 1.5 Pro", desc: "Google long-context reasoning model", badge: "New", provider: "gemini", model: "gemini-1.5-pro-latest" },
+  { id: "gemini-1-5-flash", name: "Gemini 1.5 Flash", desc: "Google fast and cheap model", badge: "Free", provider: "gemini", model: "gemini-1.5-flash-latest" },
 ];
 
 export const researchOptions: { id: ResponseType; icon: typeof Sparkles; label: string; desc: string; color: string }[] = [

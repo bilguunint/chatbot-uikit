@@ -187,6 +187,72 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
+### Enable real AI replies (OpenAI · Anthropic · Gemini)
+
+By default the chat view returns **mock** responses so you can explore the UI without any account. The demo can stream real responses from three providers — pick whichever you have a key for (or all of them):
+
+| Provider | Where to get a key | Env variable | Default model env |
+|---|---|---|---|
+| **OpenAI** | <https://platform.openai.com/> → API keys | `OPENAI_API_KEY` | `OPENAI_MODEL` (default `gpt-4o-mini`) |
+| **Anthropic** | <https://console.anthropic.com/> → API Keys | `ANTHROPIC_API_KEY` | `ANTHROPIC_MODEL` (default `claude-3-5-sonnet-latest`) |
+| **Google Gemini** | <https://aistudio.google.com/app/apikey> | `GEMINI_API_KEY` | `GEMINI_MODEL` (default `gemini-1.5-flash-latest`) |
+
+> ⚠️ Treat these keys like passwords. Never paste them into client code, commit them to git, or share them in screenshots / chat logs. If a key leaks, revoke it immediately from the provider's dashboard.
+
+#### 1. Create your local env file
+
+From the repo root:
+
+```bash
+# macOS / Linux
+cp apps/web/.env.example apps/web/.env.local
+
+# Windows (PowerShell)
+Copy-Item apps/web/.env.example apps/web/.env.local
+```
+
+Open `apps/web/.env.local` and fill in **only** the keys you have. Unused providers can stay as placeholders or be deleted — the chat will simply error with a friendly toast if you select a model whose key is missing.
+
+```env
+OPENAI_API_KEY=sk-...
+ANTHROPIC_API_KEY=sk-ant-...
+GEMINI_API_KEY=AIza...
+```
+
+`.env.local` is git-ignored (see `.gitignore`'s `.env*` rule), so the keys stay on your machine only.
+
+#### 2. Restart the dev server
+
+Next.js loads env files at boot, so stop the running process and start it again:
+
+```bash
+pnpm dev
+```
+
+Open <http://localhost:3000>, pick a model from the model dropdown above the chat input (GPT-4o, Claude 3.5 Sonnet, Gemini 1.5 Flash, …), type a message, and the assistant bubble will stream real tokens from the chosen provider.
+
+#### How it works
+
+- The browser POSTs the conversation **plus** `provider` and `model` to `apps/web/src/app/api/chat/route.ts` (a Next.js Edge route).
+- The route reads the matching `*_API_KEY` from the server environment, calls the provider's streaming endpoint (OpenAI Chat Completions / Anthropic Messages / Gemini `streamGenerateContent`), and re-streams the token deltas back as plain text.
+- Keys are **only** read on the server — they never reach the browser bundle.
+- Only the **default text** response uses real AI right now. The `Code`, `File`, `Image`, and `Audio` response types still use mock data so the demo keeps working without extra API setup.
+
+#### Troubleshooting
+
+| Symptom | Likely cause / fix |
+|---|---|
+| `OPENAI_API_KEY is not configured on the server.` toast | The key for the selected provider is missing from `.env.local`, or the dev server wasn't restarted after editing it. |
+| `… request failed (401)` | Key is wrong, revoked, or copied with extra whitespace. |
+| `… request failed (429)` | Account has no credit / hit a rate limit — top up billing or slow down requests. |
+| `Anthropic request failed (400)` | Often means the chosen `claude-*` model id is not enabled for your account — try `claude-3-5-haiku-latest`. |
+| `Gemini request failed (403)` | Key not enabled for the Generative Language API, or wrong region — recreate the key from AI Studio. |
+| Reply never streams, just hangs | Check the terminal running `pnpm dev` for the actual upstream error. |
+
+#### Deploying (Vercel etc.)
+
+Don't upload `.env.local`. Instead, add the relevant `*_API_KEY` values (and optionally `*_MODEL` overrides) as **Environment Variables** in your hosting provider's project settings, then redeploy.
+
 ## Available Scripts
 
 | Command | Description |

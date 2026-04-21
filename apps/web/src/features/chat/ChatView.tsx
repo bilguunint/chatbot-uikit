@@ -83,47 +83,23 @@ export default function ChatView({ onMobileMenuOpen }: { onMobileMenuOpen?: () =
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [showResearchDropdown]);
 
-  const simulateResponse = useCallback((userMsg: string, type: ResponseType = "default") => {
-    const response = type === "default" ? getMockResponse(userMsg) : getMockTypedResponse(userMsg, type);
-    const thinkTime = type === "default" ? Math.floor(Math.random() * 3) + 2 : Math.floor(Math.random() * 2) + 3;
+  const simulateResponse = useCallback(
+    (userMsg: string, type: ResponseType = "default") => {
+      setActiveResponseType(type);
+      setIsThinking(true);
+      setThinkingSeconds(0);
+      const thinkInterval = setInterval(() => {
+        setThinkingSeconds((s) => s + 1);
+      }, 1000);
+      const startedAt = Date.now();
 
-    setActiveResponseType(type);
-    setIsThinking(true);
-    setThinkingSeconds(0);
-    const thinkInterval = setInterval(() => {
-      setThinkingSeconds((s) => s + 1);
-    }, 1000);
-
-    setTimeout(() => {
-      clearInterval(thinkInterval);
-      setIsThinking(false);
-
+      // Non-text response types still use mocked content for now.
       if (type !== "default") {
-        setMessages((prev) => [
-          ...prev,
-          {
-            id: Date.now().toString(),
-            role: "assistant",
-            content: response,
-            thinkingTime: thinkTime,
-            responseType: type,
-          },
-        ]);
-        return;
-      }
-
-      setIsTyping(true);
-      setTypingText("");
-
-      let i = 0;
-      const typeInterval = setInterval(() => {
-        if (i < response.length) {
-          setTypingText(response.slice(0, i + 1));
-          i++;
-        } else {
-          clearInterval(typeInterval);
-          setIsTyping(false);
-          setTypingText("");
+        const response = getMockTypedResponse(userMsg, type);
+        const thinkTime = Math.floor(Math.random() * 2) + 3;
+        setTimeout(() => {
+          clearInterval(thinkInterval);
+          setIsThinking(false);
           setMessages((prev) => [
             ...prev,
             {
@@ -134,10 +110,94 @@ export default function ChatView({ onMobileMenuOpen }: { onMobileMenuOpen?: () =
               responseType: type,
             },
           ]);
+        }, thinkTime * 1000);
+        return;
+      }
+
+      // Build conversation history for the API (current user message included).
+      const history = [
+        ...messages.map((m) => ({ role: m.role, content: m.content })),
+        { role: "user" as const, content: userMsg },
+      ];
+
+      let cancelled = false;
+
+      (async () => {
+        try {
+          const res = await fetch("/api/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              messages: history,
+              provider: selectedModel.provider,
+              model: selectedModel.model,
+            }),
+          });
+
+          if (!res.ok || !res.body) {
+            const errPayload = await res.json().catch(() => ({}));
+            throw new Error(errPayload?.error ?? `Request failed (${res.status})`);
+          }
+
+          // First chunk: stop thinking, switch to typing.
+          clearInterval(thinkInterval);
+          setIsThinking(false);
+          setIsTyping(true);
+          setTypingText("");
+
+          const reader = res.body.getReader();
+          const decoder = new TextDecoder();
+          let acc = "";
+
+          while (true) {
+            const { value, done } = await reader.read();
+            if (done) break;
+            if (cancelled) return;
+            acc += decoder.decode(value, { stream: true });
+            setTypingText(acc);
+          }
+
+          const thinkTime = Math.max(1, Math.round((Date.now() - startedAt) / 1000));
+          setIsTyping(false);
+          setTypingText("");
+          setMessages((prev) => [
+            ...prev,
+            {
+              id: Date.now().toString(),
+              role: "assistant",
+              content: acc || getMockResponse(userMsg),
+              thinkingTime: thinkTime,
+              responseType: "default",
+            },
+          ]);
+        } catch (err) {
+          clearInterval(thinkInterval);
+          setIsThinking(false);
+          setIsTyping(false);
+          setTypingText("");
+          const message =
+            err instanceof Error ? err.message : "Unknown error contacting AI service";
+          toast("AI request failed", { type: "error", description: message });
+          setMessages((prev) => [
+            ...prev,
+            {
+              id: Date.now().toString(),
+              role: "assistant",
+              content: `⚠️ ${message}`,
+              thinkingTime: 0,
+              responseType: "default",
+            },
+          ]);
         }
-      }, 20);
-    }, thinkTime * 1000);
-  }, []);
+      })();
+
+      return () => {
+        cancelled = true;
+        clearInterval(thinkInterval);
+      };
+    },
+    [messages, toast, selectedModel],
+  );
 
   const handleSend = useCallback(() => {
     const text = inputValue.trim();
